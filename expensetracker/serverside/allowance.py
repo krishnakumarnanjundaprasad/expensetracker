@@ -35,6 +35,11 @@ class Allowance:
             raise
 
 
+    def get_all_allowances(self):
+        """ main function to get all the unarchived allowances """
+        pass
+
+
     def __del__(self):
         """ destructor """
         pass
