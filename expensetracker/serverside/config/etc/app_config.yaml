@@ -1,0 +1,4 @@
+app-config:
+  bldir: '/businesslogic'
+  sqlidir: '/sqlinterface'
+  configdir: '/config'
