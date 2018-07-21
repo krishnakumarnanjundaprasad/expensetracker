@@ -171,7 +171,17 @@ class BlAllowance:
 
 
     def archive_allowance(self, allowanceid: int, user: str):
-        """ archives the allowance with the given id """
+        """
+            Description: public function to archive the given allowance
+
+            Parameters:
+                allowanceid: ID of the allowance to be archived
+                user: name of the user performing the operation
+
+            Returns:
+                True if successfully archived, else None
+                Raises exceptions on errors
+        """
         try:
             if allowanceid <= 0:
                 raise ETInputValueException("Invalid allowance id: %s" % allowanceid)
