@@ -24,9 +24,11 @@ class BlAllowance:
             raise
         except DataError:
             raise
+        except ETInputValueException:
+            raise
         except Exception:
             raise
-
+        # return nothing
         return None
 
 
@@ -38,14 +40,26 @@ class BlAllowance:
             raise
         except DataError:
             raise
+        except ETInputValueException:
+            raise
         except Exception:
             raise
-
+        # return nothing
         return None
 
 
     def get_specific_month_allowance(self, month: int, year: int):
-        """ public method to get specific month's allowance """
+        """
+            Description: public method to get specific month's allowance
+
+            Parameters:
+                month: specific month to retrieve the allowance
+                year: specific year to retrieve the allowance
+
+            Returns:
+                Allowance if found, else None
+                Raises exceptions on errors
+        """
         try:
             if not month >= 1 and month <= 12:
                 raise ETInputValueException("Invalid Month provided: %s" % month)
@@ -61,7 +75,23 @@ class BlAllowance:
             raise
         except Exception:
             raise
+        # return nothing
+        return None
 
+
+    def get_archived_allowance(self):
+        """ public function to get all archived allowances """
+        try:
+            return self._sqli.get_archived_allowance()
+        except DatabaseError:
+            raise
+        except DataError:
+            raise
+        except ETInputValueException:
+            raise
+        except Exception:
+            raise
+        # return nothing
         return None
 
 
@@ -103,7 +133,40 @@ class BlAllowance:
             raise
         except Exception:
             raise
+        # return nothing
+        return None
 
+    def update_allowance(self, allowanceid: int, amount: float, user: str):
+        """
+            Description: public function to update the allowance
+
+            Parameters:
+                allowanceid: ID of the allowance to be updated
+                amount: amount to be updated for the allowance
+                user: name of the user performing the udpate
+
+            Returns:
+                True if success update, else None
+                Raises exceptions on errors
+        """
+        try:
+            if allowanceid <= 0:
+                raise ETInputValueException("Invalid allowance id: %s" % allowanceid)
+            if amount < 200 and amount > 400:
+                raise ETInputValueException("Allowance amount must be between 200 and 400. %s given" % amount)
+
+            return self._sqli.update_allowance(allowanceid, amount, user)
+        except DatabaseError:
+            raise
+        except DataError:
+            raise
+        except ETInputValueException:
+            raise
+        except ETGeneralException:
+            raise
+        except Exception:
+            raise
+        # return nothing
         return None
 
 
@@ -122,7 +185,7 @@ class BlAllowance:
             raise
         except Exception:
             raise
-
+        # return nothing
         return None
 
 

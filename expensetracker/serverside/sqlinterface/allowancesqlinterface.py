@@ -168,6 +168,8 @@ class AllowanceSqlInterface(SqlInterface):
             raise
         except ETInputValueException:
             raise
+        except ETGeneralException:
+            raise
         except Exception:
             raise
         # return nothing

@@ -24,13 +24,27 @@ class SqlInterface:
     def _get_db_file(self):
         """ private function to retrieve the SQLite database file """
         from serverside.config.configuration import Configuration
+        import platform
         self._db = ""
         try:
             conf = Configuration()
             sqlconfig = conf.get_config(configfilename = "sqlconfig.yaml")
             if sqlconfig:
+                # get the dblocation based on the OS platform
+                currentplatform = platform.system()
+                if not currentplatform:
+                    raise Exception("Unknown OS platform. Cannot operate under such platform")
+
+                dblocation = ""
+                if currentplatform.lower() == "windows":
+                    dblocation = sqlconfig["connection-properties"]["windowsdblocation"]
+                elif currentplatform.lower() == "linux":
+                    dblocation = sqlconfig["connection-properties"]["linuxdblocation"]
+                else:
+                    raise Exception("Platform: %s is not yet supported. Can only operate on Windows or Linux" % currentplatform)
+
                 sqldbfilepath = "%s/%s" % (
-                    sqlconfig["connection-properties"]["dblocation"],
+                    dblocation,
                     sqlconfig["connection-properties"]["dbname"]
                 )
                 if os.path.exists(sqldbfilepath):
@@ -60,7 +74,22 @@ class SqlInterface:
 
 
     def _execute_query(self, query, queryparams=(), fetch=True):
-        """ private function to execute the given query with(out) params """
+        """
+            Description: function to execute the given query with(out) params
+
+            Access Permissions:
+                This is a private/protected function.
+                Only this class or classes inheriting this class can access this function
+
+            Parameters:
+                query: query to be executed
+                queryparams: parameters to be supplied to execute the query. default: empty tuple
+                fetch: flag to indicate whether to execute the query as fetch or commit. default: True
+
+            Returns:
+                fetch=True: List of result if found, else None
+                fetch=False: True if query success committed, else None
+        """
         conn = None
         try:
             if not query:
