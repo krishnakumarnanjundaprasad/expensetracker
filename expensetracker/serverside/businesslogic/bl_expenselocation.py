@@ -9,6 +9,12 @@ from serverside.exceptions.customexceptions import ETGeneralException, ETInputVa
 class BlExpenseLocation:
     """ Business logic definitions for expense locations """
 
+    _sqli = None
+
+    def __init__(self):
+        """ constructor """
+        self._sqli = ExpenseLocationSqlInterface()
+
     def __del__(self):
         """ destructor """
         pass

@@ -10,9 +10,11 @@ from serverside.businesslogic.bl_expenselocation import BlExpenseLocation
 class ExpenseLocation:
     """ Expense Location Main Class """
 
+    _blexpenselocation = None
+
     def __init__(self):
         """ constructor """
-        pass
+        self._blexpenselocation = BlExpenseLocation()
 
 
     def get_all_expense_locations(self):

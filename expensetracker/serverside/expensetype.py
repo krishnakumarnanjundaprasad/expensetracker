@@ -10,9 +10,11 @@ from serverside.businesslogic.bl_expensetype import BlExpenseType
 class ExpenseType:
     """ Expense Type Main Class """
 
+    _blexpensetype = None
+
     def __init__(self):
         """ constructor """
-        pass
+        self._blexpensetype = BlExpenseType()
 
 
     def get_all_expense_types(self):
