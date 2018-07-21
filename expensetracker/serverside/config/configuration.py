@@ -18,7 +18,7 @@ class Configuration:
         if not configfilename:
             return None
 
-        configfile = "%s/etc/%s" % (self._confdir, configfilename)
+        configfile = os.path.join(self._confdir, "etc", configfilename)
         if not os.path.exists(configfile):
             return None
 

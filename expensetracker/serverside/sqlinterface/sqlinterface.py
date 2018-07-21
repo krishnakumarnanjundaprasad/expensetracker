@@ -43,7 +43,7 @@ class SqlInterface:
                 else:
                     raise Exception("Platform: %s is not yet supported. Can only operate on Windows or Linux" % currentplatform)
 
-                sqldbfilepath = "%s/%s" % (
+                sqldbfilepath = os.path.join(
                     dblocation,
                     sqlconfig["connection-properties"]["dbname"]
                 )
