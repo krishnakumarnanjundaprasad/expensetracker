@@ -11,7 +11,7 @@ from serverside.sqlinterface.sqlinterface import SqlInterface
 class AllowanceSqlInterface(SqlInterface):
     """ SQLite3 interface for Allowances """
 
-    def get_allowances(self, getall= False, specificmonth= 0, specificyear= 0
+    def get_allowances(self, getall= False, specificmonth= 0, specificyear= 0,
         allowanceid=0, findbyid=False):
         """
             Description: get the allowances

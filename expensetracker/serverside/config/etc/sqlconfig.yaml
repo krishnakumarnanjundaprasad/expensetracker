@@ -1,4 +1,4 @@
 connection-properties:
   linuxdblocation: /home/krishna/sqldb
-  windowsdblocation: C\:\\sqldb
+  windowsdblocation: C:\sqldb
   dbname: monthlyexpense.db

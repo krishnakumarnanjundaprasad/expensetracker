@@ -16,6 +16,7 @@ class Main(Allowance, ExpenseType, ExpenseLocation, Expense):
 
     def __init__(self):
         """ constructor """
+        super().__init__()
         self._read_app_config()
 
 
